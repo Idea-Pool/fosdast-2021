@@ -1,0 +1,4 @@
+@startuml
+(*) --> "Alma" as A
+A -->[Körte] (*)
+@enduml
