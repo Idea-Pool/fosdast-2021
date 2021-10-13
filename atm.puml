@@ -1,4 +1,25 @@
 @startuml
-(*) --> "Alma" as A
-A -->[Körte] (*)
+(*) --> "Készenlét" as A1
+A1 -->[Bankkártya behelyezése] "Bankkártya ellenőrzése" as A2
+A2 -->if "Jó-e a kártya?" then
+  -->[Nem] "Kártya kiadás" as A2n1
+  --> A1
+else
+  -->[Igen] "Nyelv választás" as A2i1
+  -->[Nyelv kiválasztás] "PIN kód kérése" as A2i2
+  -->[PIN Kód megadása] "PIN kód ellenőrzése" as A2i3
+  -->if "PIN kód megfelelő?" then
+    -->[Nem] if "Hanyadik próbálkozás?" then
+      -->[3] A2n1
+    else
+      -->[<3, i+1] A2i2
+    endif
+  else
+    -->[Igen] "Funkció választás" as A2i3i1
+    
+    A2i3i1 -->[Egyenleg lekérdezés kiválasztása] "Egyenleg kiadás" as A2i3i2
+    A2i3i2 --> A2n1
+  endif
+endif
+A1 --> (*)
 @enduml
