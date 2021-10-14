@@ -1,0 +1,19 @@
+@startuml
+(*) --> "Készenlét" as A1
+A1 -->[Bankkártya behelyezése] "Nyelv kiválasztása" as A2
+A2 -->[Nyelv kiválasztása] "Pin kód kérése" as A3
+A3 --> if "Helyes-e a Pin kód?" then
+    -->[Nem] if "Hanyadik próbálkozás?" then
+        -->[3] "Kártya elutasítása" as A4
+        A4 --> A1
+        else
+        -->[<3] A3
+        endif
+    -->[Igen] "Funkció kiválasztása" as A5
+    A5 -->[Egyenleg lekérdezés kiválasztása] "OK gomb" as A6
+    A6 --> "Kártya kiadása" as A7
+    A7 --> "Bizonylat kiadása" as A8
+    A8 --> A1
+
+A1 -->(*)
+@enduml

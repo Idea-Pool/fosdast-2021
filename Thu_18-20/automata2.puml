@@ -1,0 +1,26 @@
+@startuml
+(*) --> "Nyugalmi állapot" as A1
+A1 --> [Termék kiválasztása] "Ár kiírása" as A2
+A2 --> A1
+
+A1 -->[Érme bedobása] "Számláló" as A3
+A3 -->[Érme bedobása] A3
+A3 -->[Törlés] "Pénz visszaadás" as A4
+A4 --> A1
+
+A3 --> if "Elég-e a pénz?" then 
+  -->[Elég] "Termék kiadása" as A5
+  -->if "Van visszajáró?" then
+    -->[Van] "Visszajáró visszaadása" as A6
+    A6 --> A1
+    else
+    --> A1
+    endif
+  else
+  -->[Nem elég] A3
+  endif
+A5 --> A1
+
+
+A1 --> (*)
+@enduml
